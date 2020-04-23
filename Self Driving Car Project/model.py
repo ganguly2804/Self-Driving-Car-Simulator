@@ -47,7 +47,6 @@ def random_translate(image, steering_angle, range_x, range_y):
     image = cv2.warpAffine(image, trans_m, (width, height))
     return image, steering_angle
 
-
 def random_shadow(image):
     height, width = image.shape[:2]
     x1, y1 = int(width * np.random.rand()), 0

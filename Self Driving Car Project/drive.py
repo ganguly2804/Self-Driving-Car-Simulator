@@ -47,7 +47,8 @@ def telemetry(sid, data):
         else:
             speed_limit = MAX_SPEED
         throttle = 1.0 - steering_angle**2 - (speed/speed_limit)**2
-
+        print(str(steering_angle) + "     " + str(throttle))
+        
         send_control(steering_angle, throttle)
     else:
         sio.emit('manual', data={}, skip_sid=True)
