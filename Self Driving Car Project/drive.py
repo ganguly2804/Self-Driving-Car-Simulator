@@ -48,7 +48,6 @@ def telemetry(sid, data):
             speed_limit = MAX_SPEED
         throttle = 1.0 - steering_angle**2 - (speed/speed_limit)**2
 
-        #print("Steering angle:" + str(steering_angle) + " Throttle:" + str(throttle) + " Speed:" + str(speed))
         send_control(steering_angle, throttle)
     else:
         sio.emit('manual', data={}, skip_sid=True)
@@ -68,6 +67,6 @@ def send_control(steering_angle, throttle):
         skip_sid=True)
 
 if __name__ == '__main__':
-    model = load_model('model-mix.h5')
+    model = load_model('model-track2.h5')
     app = socketio.Middleware(sio, app)
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
