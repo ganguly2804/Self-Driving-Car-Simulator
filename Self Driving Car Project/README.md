@@ -22,3 +22,6 @@ This is the code for training a machine learning model to drive a simulated car 
 6. Go to model.py and update the location of your driving_log.csv file.
 7. On anaconda prompt: Go to the project folder, activate the environment.
 8. On anaconda prompt: python model.py
+
+#Credits:
+https://www.youtube.com/watch?v=EaY5QiZwSP4

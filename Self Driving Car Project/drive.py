@@ -18,11 +18,12 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_CHANNELS = 66, 200, 3
-MAX_SPEED = 25
+MAX_SPEED = 30
 MIN_SPEED = 10
 speed_limit = MAX_SPEED
 
 def preprocess(image):
+    print(len(image))
     image = image[60:-25, :, :]
     image = cv2.resize(image, (IMAGE_WIDTH, IMAGE_HEIGHT), cv2.INTER_AREA)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2YUV)
@@ -47,7 +48,7 @@ def telemetry(sid, data):
         else:
             speed_limit = MAX_SPEED
         throttle = 1.0 - steering_angle**2 - (speed/speed_limit)**2
-        print(str(steering_angle) + "     " + str(throttle))
+        #print(str(steering_angle) + "     " + str(throttle))
         
         send_control(steering_angle, throttle)
     else:
@@ -68,6 +69,6 @@ def send_control(steering_angle, throttle):
         skip_sid=True)
 
 if __name__ == '__main__':
-    model = load_model('model-track2.h5')
+    model = load_model('model-mix.h5')
     app = socketio.Middleware(sio, app)
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
